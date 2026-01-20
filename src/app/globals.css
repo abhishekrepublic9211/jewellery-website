@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #20604a;
+  --color-background-light: #f6f8f7;
+  --color-background-dark: #141e1b;
+  --color-accent-gold: #B89C6F;
+
+  --font-display: var(--font-epilogue), sans-serif;
+  --font-sans: var(--font-manrope), sans-serif;
+
+  --radius-default: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f6f8f7;
+    --foreground: #121615;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #141e1b;
+      --foreground: #ffffff;
+    }
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-epilogue), sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+  }
+
+  .parallax-bg {
+    background-attachment: fixed;
+  }
+
+  @media (max-width: 1024px) {
+    .parallax-bg {
+      background-attachment: scroll;
+    }
+  }
+
+  .bento-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -10px rgba(32, 96, 74, 0.15);
+  }
+
+  .product-card:hover .hover-image { opacity: 1; }
+  .product-card:hover .base-image { opacity: 0; }
+  .product-card:hover .quick-add { transform: translateY(0); opacity: 1; }
+  .quick-add { transform: translateY(10px); opacity: 0; transition: all 0.3s ease; }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #20604a33;
+    border-radius: 10px;
+  }
 }
